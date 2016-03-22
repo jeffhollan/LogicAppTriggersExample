@@ -33,7 +33,7 @@ namespace LogicAppTriggers.Controllers
         /// <param name="id"></param>
         private async void doWork()
         {
-            Task.Delay(12000).Wait(); //Do work will work for 120 seconds)
+            Task.Delay(60000).Wait(); //Do work will work for 60 seconds)
             using (HttpClient client = new HttpClient())
             {
                 foreach(string callbackUrl in subscriptions)
