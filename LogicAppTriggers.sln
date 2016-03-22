@@ -1,0 +1,28 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.24720.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LogicAppTriggers", "LogicAppTriggers\LogicAppTriggers.csproj", "{4EE7662E-2BD4-4D91-B6FB-C3D02562D288}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LogicAppTriggers.Tests", "LogicAppTriggers.Tests\LogicAppTriggers.Tests.csproj", "{536F9A31-28CD-4A47-B522-9166699E17F9}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{4EE7662E-2BD4-4D91-B6FB-C3D02562D288}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4EE7662E-2BD4-4D91-B6FB-C3D02562D288}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4EE7662E-2BD4-4D91-B6FB-C3D02562D288}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4EE7662E-2BD4-4D91-B6FB-C3D02562D288}.Release|Any CPU.Build.0 = Release|Any CPU
+		{536F9A31-28CD-4A47-B522-9166699E17F9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{536F9A31-28CD-4A47-B522-9166699E17F9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{536F9A31-28CD-4A47-B522-9166699E17F9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{536F9A31-28CD-4A47-B522-9166699E17F9}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
