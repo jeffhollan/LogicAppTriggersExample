@@ -31,12 +31,12 @@ namespace LogicAppTriggers.Controllers
         /// Some background thread monitoring when alerts should occur.  
         /// </summary>
         /// <param name="id"></param>
-        private void doWork(string callbackUrl)
+        private async void doWork(string callbackUrl)
         {
-            Task.Delay(120000).Wait(); //Do work will work for 120 seconds)
+            Task.Delay(120).Wait(); //Do work will work for 120 seconds)
             using (HttpClient client = new HttpClient())
             {
-                client.PostAsync<string>(callbackUrl, @"{""Trigger"": ""Fired""}", new JsonMediaTypeFormatter(), "application/json");
+                await client.PostAsync<string>(callbackUrl, @"{""Trigger"": ""Fired""}", new JsonMediaTypeFormatter(), "application/json");
             }
         }
 
