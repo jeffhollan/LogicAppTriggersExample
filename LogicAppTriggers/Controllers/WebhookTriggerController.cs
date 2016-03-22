@@ -12,7 +12,7 @@ namespace LogicAppTriggers.Controllers
 {
     public class WebhookTriggerController : ApiController
     {
-        public List<string> subscriptions = new List<string>();
+        public static List<string> subscriptions = new List<string>();
         /// <summary>
         /// Recieve a subscription to a webhook.  In this case I'm just going to wait for 2 minutes and then fire a trigger to the callback URL.
         /// You could also have a dictionary of callback URLs and call all when certain events happen.
@@ -23,24 +23,22 @@ namespace LogicAppTriggers.Controllers
         public HttpResponseMessage Subscribe([FromBody] string callbackUrl)
         {
             subscriptions.Add(callbackUrl);
-            new Thread(() => doWork()).Start();   //Start the thread of work, but continue on before it completes
+         //   new Thread(() => doWork()).Start();   //Start the thread of work, but continue on before it completes
             return Request.CreateResponse();
         }
 
-        /// <summary>
-        /// Some background thread monitoring when alerts should occur.  
-        /// </summary>
-        /// <param name="id"></param>
-        private async void doWork()
+
+
+        [HttpGet, Route("api/webhooktrigger/trigger")]
+        public async Task<HttpResponseMessage> Get()
         {
-            Task.Delay(60000).Wait(); //Do work will work for 60 seconds)
             using (HttpClient client = new HttpClient())
             {
-                foreach(string callbackUrl in subscriptions)
-                await client.PostAsync<string>(callbackUrl, @"{""Trigger"": ""Fired""}", new JsonMediaTypeFormatter(), "application/json");
+                foreach (string callbackUrl in subscriptions)
+                    await client.PostAsync<List<string>>(callbackUrl, subscriptions, new JsonMediaTypeFormatter(), "application/json");
             }
+            return Request.CreateResponse<List<string>>(subscriptions);
         }
-
         /// <summary>
         /// Unsubscribe
         /// </summary>
