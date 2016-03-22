@@ -33,7 +33,7 @@ namespace LogicAppTriggers.Controllers
         /// <param name="id"></param>
         private async void doWork(string callbackUrl)
         {
-            Task.Delay(120).Wait(); //Do work will work for 120 seconds)
+            Task.Delay(12000).Wait(); //Do work will work for 120 seconds)
             using (HttpClient client = new HttpClient())
             {
                 await client.PostAsync<string>(callbackUrl, @"{""Trigger"": ""Fired""}", new JsonMediaTypeFormatter(), "application/json");
