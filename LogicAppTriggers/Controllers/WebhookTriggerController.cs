@@ -14,8 +14,7 @@ namespace LogicAppTriggers.Controllers
     {
         public static List<string> subscriptions = new List<string>();
         /// <summary>
-        /// Recieve a subscription to a webhook.  In this case I'm just going to wait for 2 minutes and then fire a trigger to the callback URL.
-        /// You could also have a dictionary of callback URLs and call all when certain events happen.
+        /// Recieve a subscription to a webhook.  
         /// </summary>
         /// <param name="callbackUrl">URL to get from Logic Apps - @listCallbackUrl()</param>
         /// <returns></returns>
@@ -23,21 +22,23 @@ namespace LogicAppTriggers.Controllers
         public HttpResponseMessage Subscribe([FromBody] string callbackUrl)
         {
             subscriptions.Add(callbackUrl);
-         //   new Thread(() => doWork()).Start();   //Start the thread of work, but continue on before it completes
             return Request.CreateResponse();
         }
 
 
-
+        /// <summary>
+        /// Fire all triggers - do a GET to this API to fire all triggers subscribed
+        /// </summary>
+        /// <returns></returns>
         [HttpGet, Route("api/webhooktrigger/trigger")]
         public async Task<HttpResponseMessage> Get()
         {
             using (HttpClient client = new HttpClient())
             {
                 foreach (string callbackUrl in subscriptions)
-                    await client.PostAsync<List<string>>(callbackUrl, subscriptions, new JsonMediaTypeFormatter(), "application/json");
+                    await client.PostAsync(callbackUrl, @"{""trigger"":""fired""}", new JsonMediaTypeFormatter(), "application/json");
             }
-            return Request.CreateResponse<List<string>>(subscriptions);
+            return Request.CreateResponse(HttpStatusCode.Accepted, String.Format("There are {0} subscriptions fired", subscriptions.Count));
         }
         /// <summary>
         /// Unsubscribe
